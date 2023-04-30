@@ -1,0 +1,56 @@
+buildscript {
+	ext {
+		cleanArchitectureVersion = '2.4.3'
+		springBootVersion = '2.6.12'
+		sonarVersion = '3.0'
+		jacocoVersion = '0.8.5'
+        lombokVersion = '1.18.22'
+        modelMapperVersion = '2.4.2'
+        jsonwebtokenJjwtVersion = '0.9.1'
+        springBootStarterMailVersion = '2.6.2'
+        nimbusJoseJwtVersion = '9.0.1'
+        apachePoiVersion = '4.1.2'
+        jakartaServletApiVersion = '4.0.4'
+        apacheVelocityEngineVersion = '2.3'
+        objectMapperApiVersion = '0.1.0'
+        objectMapperVersion = '0.1.0'
+        springBootStarterMailVersion = '2.6.2'
+        javaxValidationApiVersion = '2.0.1.Final'
+        springBootStarterUndertowVersion = '2.7.0'
+        HikariCPVersion = '3.4.1'
+        springfoxSwagger2Version = '3.0.0'
+        springfoxBootStarterVersion = '3.0.0'
+        springBootStarterParentVersion = '2.6.2'
+        springfoxSwaggerUiVersion = '3.0.0'
+        awsSecretManagerVersion = '1.0.7'
+        gsonVersion = '2.8.9'
+        authjwtVersio = '4.0.0'
+        springManagement = '1.0.15.RELEASE'
+        springCloudVersion = '2021.0.4'
+        springdoc = '1.6.9'
+	}
+}
+
+plugins {
+	id 'co.com.bancolombia.cleanArchitecture' version "${cleanArchitectureVersion}"
+	id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springManagement}"
+	id 'org.sonarqube' version "${sonarVersion}"
+	id 'jacoco'
+}
+
+sonarqube {
+    def modules = subprojects.projectDir.collect { "${it.toString().replace(project.projectDir.toString() + "/", "")}" }
+    properties {
+        property "sonar.sourceEnconding", "UTF-8"
+        property "sonar.modules", "${modules.join(',')}"
+        property "sonar.sources", "src,deployment,settings.gradle,main.gradle,build.gradle,${modules.collect { "${it}/build.gradle" }.join(',')}"
+        property "sonar.test", "src/test"
+        property "sonar.java.binaries", ""
+        property "sonar.junit.reportsPath", ""
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+    }
+}
+
+apply from: './main.gradle'

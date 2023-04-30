@@ -1,0 +1,19 @@
+##Spring Configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+spring:
+  application:
+    name: api-drones
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  profiles:
+    include:
+  jpa:
+    hibernate:
+      ddl-auto: create
