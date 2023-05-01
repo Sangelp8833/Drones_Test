@@ -1,16 +1,21 @@
 package co.com.samuel.model.drones.gateway;
 
 import co.com.samuel.model.drones.Drones;
-import co.com.samuel.model.drones.ClientsDto;
+import co.com.samuel.model.drones.DronesDto;
+import co.com.samuel.model.medication.Medication;
 
+import java.util.List;
 import java.util.Map;
 
-public interface DronesRepository<T,E> {
+public interface DronesRepository {
 
-    Drones save(ClientsDto clientsDto);
-    Drones findById(Long id);
-    E findAll(T pageable);
-    boolean delete(Long id);
-    boolean update(Map<String, Object> partialUpdate, Long id);
+    Drones saveDrone(Drones drones);
+    Drones registerDrones(DronesDto dronesDto);
+    Drones findBySerialNumber(String serialNumber);
+    Drones loadingMedication(String serialNumber, List<String> medicationCodes);
+    List<Medication> checkingLoadedMedication(String serialNumber);
+    List<Drones> findAvailableDrones();
+    List<Drones> findAll();
+    void checkingBatteryLevel(String serialNumber);
 
 }

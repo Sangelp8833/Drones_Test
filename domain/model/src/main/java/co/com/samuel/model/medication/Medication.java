@@ -8,4 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Medication {
+    private String name;
+    private Double weight;
+    private String code;
+    private String imageLink;
 }
